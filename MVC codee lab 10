@@ -1,4 +1,5 @@
-// Model: Task Class
+// Task Model Class
+
 class Task {
     private int id;
     private String title;
@@ -13,6 +14,7 @@ class Task {
     }
 
     // Getters
+
     public int getId() {
         return id;
     }
@@ -37,6 +39,8 @@ class Task {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    // Mark task as completed
 
     public void markAsCompleted() {
         this.isCompleted = true;
@@ -64,22 +68,26 @@ class TaskView {
         }
     }
 
+    // Scanner object for user input
     private java.util.Scanner scanner;
 
     public TaskView() {
         this.scanner = new java.util.Scanner(System.in);
     }
 
+    // Prompt user for task title
     public String promptForTitle() {
         System.out.print("Enter task title: ");
         return scanner.nextLine().trim();
     }
 
+    // Prompt user for task description
     public String promptForDescription() {
         System.out.print("Enter task description: ");
         return scanner.nextLine().trim();
     }
 
+    // Prompt user for task ID
     public int promptForTaskId() {
         System.out.print("Enter task ID to mark as completed: ");
         while (true) {
@@ -92,7 +100,7 @@ class TaskView {
         }
     }
 
-    // finally block mein scanner close karo
+    // Close scanner
     public void close() {
         scanner.close();
     }
@@ -110,6 +118,7 @@ class TaskController {
         this.nextId = 1;
     }
 
+    // Add new task
     public void addTask(String title, String description) {
         if (tasks.stream()
                 .anyMatch(task -> task.getTitle().equals(title) && task.getDescription().equals(description))) {
@@ -121,10 +130,12 @@ class TaskController {
         }
     }
 
+    // Display all tasks
     public void displayTasks() {
         view.displayTasks(tasks);
     }
 
+    // Mark task as completed by ID
     public void markTaskAsCompleted(int id) {
         for (Task task : tasks) {
             if (task.getId() == id) {
@@ -138,6 +149,7 @@ class TaskController {
 }
 
 // Main Application
+
 public class Main {
     public static void main(String[] args) {
         TaskView view = new TaskView();
@@ -169,7 +181,7 @@ public class Main {
                         scanner.close();
                         return;
                     default:
-                        System.out.println("I1nvalid choice. Please try again.");
+                        System.out.println("Invalid choice. Please try again.");
                 }
             }
         } catch (Exception e) {
